@@ -15,7 +15,30 @@ Note: The machine moves are selected randomly.
 - From your localhost (http://localhost:8080) you can starting using the API using the below end-point(s).
 
 ## RESTful Web Service
-### Users End-Points:
-|Method|              URI                   |                  Description                     		              | 
-|------|------------------------------------|------------------------------------------------------------------------|
-| POST | /api/v1/game | Takes the user input, plays for the computer and returns the winner and score | 
+### End-Points
+##### Description: Takes the user input, plays for the computer and returns the winner and score
+##### Mehod: POST
+##### Endpoint: /api/v1/game
+##### Request Body:
+```
+{
+  "hand": "...", # Required: String with any of the following (PAPER, ROCK, SCISSORS)
+  "userId": "..." # Optional: String and optional
+}
+```
+##### Example:
+###### Request
+```
+{"hand": "PAPER"}
+```
+###### Response
+```
+{
+    "result": "WON",
+    "computerHand": "ROCK",
+    "score": {
+        "humanPoints": 1,
+        "machinePoints": 0
+    }
+}
+```

@@ -2,6 +2,7 @@ package com.challenge.game.rest.controller;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -43,6 +44,7 @@ public class GameControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                                 .setControllerAdvice(new ExceptionController())
                                  .build();
     }
 
@@ -58,6 +60,17 @@ public class GameControllerTest {
                .andExpect(jsonPath("$.score", notNullValue()))
                .andExpect(jsonPath("$.score.humanPoints", notNullValue()))
                .andExpect(jsonPath("$.score.machinePoints", notNullValue()));
+    }
+
+    @Test
+    public void testHandleUserGameMove_givenMissingHand_returnErrorMessage() throws Exception {
+        GameMoveRequest request = new GameMoveRequest();
+
+        mockMvc.perform(post(PathConstant.MAIN_PATH).contentType(APPLICATION_JSON)
+                                                    .content(mapper.writeValueAsString(request)))
+               .andExpect(status().isBadRequest())
+               .andExpect(jsonPath("$.errorMessage", equalTo("User input is mandatory")))
+               .andExpect(jsonPath("$.status", equalTo(BAD_REQUEST.name())));
     }
 
     @Test
