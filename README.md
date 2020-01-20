@@ -1,10 +1,14 @@
 # Rock Paper Scissors Game!
-### Introduction:
+## Introduction:
 A turn-based game of rock-paper-scissors that takes user input via REST API, plays for the computer, and then declares the winner. For more information about the game and how to play it please visit: https://en.wikipedia.org/wiki/Rock_paper_scissors
 
 Note: The machine moves are selected randomly.
 
-
+## Technology Stack:
+- Java 8
+- Spring Boot
+- Maven building tool
+- JUnit, and Mockito frameworks for unit and integration testing
 
 ## Running the service locally:
 - Clone the repository
@@ -14,16 +18,15 @@ Note: The machine moves are selected randomly.
 	2. Simply you can either run the application by executing `/src/main/java/com/callenge/game/application/MainApplication.java` or use the following command: `mvn spring-boot:run`
 - From your localhost (http://localhost:8080) you can starting using the API using the below end-point(s).
 
-## RESTful Web Service
-### End-Points
-##### Description: Takes the user input, plays for the computer and returns the winner and score
+## APIs
+#### Use Case: Takes the user input, plays for the computer and returns the winner and score
 ##### Mehod: POST
 ##### Endpoint: /api/v1/game
 ##### Request Body:
 ```
 {
-  "hand": "...", # Required: String with any of the following (PAPER, ROCK, SCISSORS)
-  "userId": "..." # Optional: String and optional
+  "hand": "...", // Required: String with any of the following (PAPER, ROCK, SCISSORS)
+  "userId": "..." // Optional: String and optional
 }
 ```
 ##### Example:
